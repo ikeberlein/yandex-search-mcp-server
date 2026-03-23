@@ -18,7 +18,7 @@ USER uv
 COPY pyproject.toml uv.lock .
 
 # Install dependencies using uv
-RUN uv sync --no-dev
+RUN uv sync --no-dev && uv cache clean
 
 COPY *.py .
 
