@@ -109,39 +109,6 @@ def process_single_document(doc_string):
     return None
 
 
-def xweb_search(body: dict) -> str:
-    """
-    Use this tool when the user needs to search online.
-
-    Args:
-        body (dict): Required. input containing:
-            - query: Required. Search query string. Can contain a question and keywords
-            - search_region: Required. Search region. Valid values: 'ru' - Russian region, 'en' - English region
-            - count: Optional, default 4. Maximum results to return.
-
-        minimal example: "body": {
-                             "query": "who won the latest F1 race 2025",
-                             "search_region": "ru"
-                         }
-
-    Returns:
-        dict: array of data and source
-    """
-    data = body
-    required_keys = {"query", "search_region"}
-    if error_message := validate_input_data(data, required_keys):
-        return error_message
-
-    decoded_data = call_web_search(data)
-    doc_strings = extract_documents_from_xml(decoded_data)
-    response = []
-
-    for doc_string in doc_strings:
-        doc_result = process_single_document(doc_string)
-        if doc_result:
-            response.append(doc_result)
-
-    return json.dumps(response, ensure_ascii=False, indent=2)
 
 @mcp.tool()
 def web_search(body: dict) -> str:
