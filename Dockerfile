@@ -1,6 +1,5 @@
 # Yandex Search API MCP Server Dockerfile
-# Base image with Python 3.10
-FROM python:3.10-slim as builder
+FROM ghcr.io/astral-sh/uv:alpine
 
 # Image metadata
 LABEL org.opencontainers.image.title="Yandex Search API MCP Server"
@@ -9,24 +8,33 @@ LABEL org.opencontainers.image.vendor="Yandex LLC"
 LABEL org.opencontainers.image.version="1.0.0"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 
-# Install dependencies
-RUN pip install requests mcp[cli]
-
-# Final image
 WORKDIR /app
-ENV PATH=/root/.local/bin:$PATH
 
-# No need to copy dependencies with global installation
-COPY --chown=1000:1000 server.py detail.py ./
+RUN addgroup -g 1000 uv && adduser -D -u 1000 -G uv uv
+RUN chown -R uv:uv /app
+USER uv
 
-# Environment setup
-ENV PATH=/root/.local/bin:$PATH
-ENV PYTHONPATH=/app
-USER 1000
+# Copy dependency files
+COPY pyproject.toml uv.lock .
+
+# Install dependencies using uv
+RUN uv sync --no-dev
+
+COPY *.py .
+
+# compile used modules
+RUN uv run fastmcp version && uv run python -c "import server"
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD python3 -c "import requests; requests.get('http://localhost/health')"
+  CMD uv run python -c "import requests; requests.get('http://localhost:8000/health')"
 
 # Command to run the MCP server using the virtual environment
-CMD ["python3", "server.py"]
+# Use uv run fastmcp run server.py for stdio
+# Or specify host and port: uv run fastmcp run --host <hostname> --port <port number> server.py
+# For TCP, bind to 0.0.0.0:8000
+
+ENTRYPOINT [ "uv", "run", "fastmcp" ]
+
+CMD [ "run", "--no-banner", "-t", "http", "--host", "0.0.0.0", "server.py:mcp" ]
+

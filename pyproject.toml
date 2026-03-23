@@ -1,0 +1,13 @@
+[project]
+name = "yandex-search-mcp-server"
+version = "0.1.0"
+description = "Yandex Search MCP Server for AI assistants"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastmcp>=3.1",
+    "requests>=2.31",
+]
+
+[project.scripts]
+run-server = "uv run server.py"

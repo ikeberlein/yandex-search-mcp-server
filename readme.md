@@ -6,7 +6,6 @@ This Model Context Protocol (MCP) server lets AI assistants like Claude and Curs
 
 The Yandex Search MCP server includes the following tools:
 
-- **ai_search_post** Performs a real-time web search and returns an AI-generated answer based on the search results using Yandex Yazeka AI model. 
 - **web_search_post**: Performs a real-time web search and returns answer with sources
 
 ## Getting API Key
@@ -19,10 +18,6 @@ To use this MCP server, you need to be a customer of Yandex Search API. Also you
 
 ## How to use Yandex Search MCP Remotely (recommended)
 ### Yandex Search MCP URL for Remote Connection
-
-```
-https://d5de9siimt9bkld7viic.emzafcgx.apigw.yandexcloud.net:3000/sse
-```
 
 ### How to Add Yandex Search MCP to Claude 🤖
 
@@ -215,7 +210,7 @@ For MCP clients that support direct interaction with Docker or Podman containers
 
 **Important**: Replace `<your_api_key>` and `<your_folder_id>` with your actual Yandex Search API key and folder id. Ensure that only one instance of the server (local or Docker) is active at a time to avoid conflicts.
 
-After updating the configuration, the system should automatically detect and run the server, exposing the `ai_search_with_yazeka` and `web_search` tools for use.
+After updating the configuration, the system should automatically detect and run the server, exposing the `ai_search` and `web_search` tools for use.
 
 ### Option 2: Use Python + MCP Config
 
@@ -251,7 +246,7 @@ To setup the MCP server on your system using Python, add the following configura
 
 **Important**: Replace `<your_api_key>` and `<your_folder_id>` with your actual Yandex Search API key and folder id. Update `/path/to/mcp-server-demo` to the actual path where the repository is located on your system if necessary.
 
-After updating the configuration, the system should automatically detect and run the server, exposing the `ai_search_with_yazeka` and `web_search` tools for use.
+After updating the configuration, the system should automatically detect and run the server, exposing the `ai_search` and `web_search` tools for use.
 
 #### Step 2.2 Launch the local MCP Server directly
 

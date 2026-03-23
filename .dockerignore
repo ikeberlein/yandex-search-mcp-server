@@ -1,0 +1,77 @@
+# Exclude VCS directories
+.git
+.gitignore
+.gitmodules
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.dist-info/
+*.egg
+dist/
+build/
+*.so
+
+# Virtual environment directories
+.venv/
+env/
+venv/
+python-env/
+.Python
+
+# Pip and uv lock files (keep lockfile in repo, ignore generated caches)
+pip-wheel-metadata/
+*.whl
+*.egg-info/
+uv.lock
+
+# Local configuration files
+*.env
+.env
+.env.*
+docker-compose.override.yml
+.envrc
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# Test and coverage data
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.mypy_cache/
+.cover/
+htmlcov/
+coverage/
+
+# Pre-commit and linting caches
+.pre-commit-config.yaml
+.rubocop.yml
+.eslintrc
+.eslintignore
+.prettierrc
+.prettierignore
+.terraform/
+.terraformrc
+
+# Miscellaneous
+# Empty files
+# Keep Dockerfile and source code only
+!server.py
+!detail.py
+!pyproject.toml
+!uv.lock

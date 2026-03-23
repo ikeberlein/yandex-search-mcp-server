@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.dist-info/
+*.venv/
+env/
+venv/
+.venv/
+.python-version
+
+# Dependencies
+*.egg
+*.egg-info/
+dist/
+build/
+
+# FastMCP / server artifacts
+*.log
+
+# uv lock file
+uv.lock
+
+# Miscellaneous
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Local environment variables
+.env
+.env.*
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Logs
+*.log
